@@ -1,8 +1,10 @@
 import './App.css'
 import React, { useEffect, useRef } from 'react'
 
-import styled from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 import Typed from 'typed.js'
+
+import theme from './theme.tsx'
 
 const AppWrapper = styled.div`
 	display: flex;
@@ -10,34 +12,69 @@ const AppWrapper = styled.div`
 
 const Landing = styled.div`
 	display: flex;
-  justify-content: space-between;
+	flex-direction: column;
+	justify-content: space-between;
+	/* background-color: black; */
+	background-color: ${theme.colorPallet.black};
+`
+
+const white = css`
+	color: white;
+	/* font-size: 58; */
 `
 
 const Heading = styled.h1`
-	color: black;
+	${white}
 	font-size: 24;
 `
 
+const Row = styled.div`
+	flex: 1;
+	flex-direction: 'row';
+`
+
 function App() {
-  const button = useRef(null)
-  useEffect(() => {
-    const typed = new Typed(button.current, {
-      strings: ["Handy", "Mandy", "Candy", "More Strings"], // Strings to display
-      // Speed settings, try diffrent values untill you get good results
-      startDelay: 300,
-      typeSpeed: 100,
-      backSpeed: 100,
-      backDelay: 100
-    });
-  })
+	const button = useRef(null)
+	useEffect(() => {
+		const typed = new Typed(button.current, {
+			strings: [
+				'I am passionate about... presence',
+				'I am passionate about... coding',
+				'I love... live music',
+				'I enjoy... problem solving',
+				'I escape with... weightlifting',
+				'I seek... consciousness <i class="fas fa-om"></i>',
+				'I would love... to meet you',
+			], //My sentences
+			typeSpeed: 50, //How fast it types (higher = slower)
+			backSpeed: 60, //How fast it backspaces (higher = slower)
+			startDelay: 100,
+			loop: true,
+			showCursor: false,
+		})
+		return () => {
+			typed.destroy()
+		}
+	}, [])
 	return (
-		<AppWrapper>
-			<Landing>
-				<Heading>Ryan Koch here</Heading>
-        <Heading>Welcome to my personal site -- please enjoy this sample of my design philosphy and code :]</Heading>
-        <Heading ref={button}>Button</Heading>
-			</Landing>
-		</AppWrapper>
+		<ThemeProvider theme={theme}>
+			<AppWrapper>
+				<Landing>
+					<Row>
+						<Heading>Ryan Koch here</Heading>
+					</Row>
+					<Row>
+						<Heading>
+							Welcome to my personal site -- please enjoy this sample of my
+							design philosphy and code :]
+						</Heading>
+					</Row>
+					<Row>
+						<Heading ref={button} />
+					</Row>
+				</Landing>
+			</AppWrapper>
+		</ThemeProvider>
 	)
 }
 
