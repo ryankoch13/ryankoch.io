@@ -10,6 +10,8 @@ import styles from './styles.ts'
 import TypedComponent from '../../components/Typed.tsx'
 import { ReactTyped, ReactTypedProps } from 'react-typed'
 import { shift } from './../../hooks/utilities.tsx'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock } from '@fortawesome/free-solid-svg-icons'
 import ShiftButton from '../../components/ShiftButton.tsx'
 import Canvas from './Canvas.tsx'
 
@@ -56,7 +58,8 @@ const white = css`
 
 const Heading = styled.h1`
 	${white}
-	font-size: 24;
+	font-size: 24px;
+	min-height: 48px;
 `
 
 const Row = styled.div`
@@ -72,11 +75,11 @@ const Row = styled.div`
 		strings: [
 			'I am passionate about... presence',
 			'I am passionate about... coding',
-			// 'I love... live music',
-			// 'I enjoy... problem solving',
-			// 'I escape with... weightlifting',
-			// 'I seek... consciousness <i class="fas fa-om"></i>',
-			// 'I would love... to meet you',
+			'I love... live music',
+			'I enjoy... problem solving',
+			'I escape with... weightlifting',
+			'I seek... consciousness',
+			'I would love... to meet you',
 		],
 		typeSpeed: 50,
 		backSpeed: 60,
@@ -151,7 +154,7 @@ const Row = styled.div`
 					</Row>
 					<Row>
 						<ReactTyped {...typedProps}>
-							<Heading>I</Heading>
+							<Heading><FontAwesomeIcon icon="newspaper"/></Heading>
 						</ReactTyped>
 					</Row>
 				</Landing>
@@ -159,6 +162,7 @@ const Row = styled.div`
 				 */}
 				 <ShiftButton />
 			</AppWrapper>
+			
 			{/* <div id='canvasWrapper'>
 				<canvas ref={canvasRef} style={styles.canvas} height={height + 'px'} width={width + 'px'} id='myCanvas' onClick={() => drawStuff()} />
 			</div> */}
