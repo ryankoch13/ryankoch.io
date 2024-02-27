@@ -8,6 +8,10 @@ import curls from '../../assets/curls.png'
 import theme from '../../theme.ts'
 import styles from './styles.ts'
 import TypedComponent from '../../components/Typed.tsx'
+import { ReactTyped, ReactTypedProps } from 'react-typed'
+import { shift } from './../../hooks/utilities.tsx'
+import ShiftButton from '../../components/ShiftButton.tsx'
+import Canvas from './Canvas.tsx'
 
 
 
@@ -37,11 +41,11 @@ const LandingWrapper = styled.div`
 `
 
 const Landing = styled.div`
-		display: 'flex';
-	flex-direction: 'column';
-	justify-content: 'space-between';
+		// display: 'flex';
+	// flex-direction: 'column';
+	// justify-content: 'space-between';
 	background-color: ${theme.colorPallet.black};
-	background-image: './../../assets/curls.png';
+	// background-image: './../../assets/curls.png';
 	// background-repeat: repeat;
 `
 
@@ -56,91 +60,34 @@ const Heading = styled.h1`
 `
 
 const Row = styled.div`
+	background-color: 'black';
 	flex: 1;
 	flex-direction: 'row';
-`
-
-const Test = styled.div`
-	// flex: 1;
-	height: 400;
-`
-
-const Button = styled.div`
-	// flex: 1;
-	flex-direction: 'row';
-	height: 200;
-	background-color: ${theme.colorPallet.salmon};
-	filter: hue-rotate(${rotate}deg);
+	height: '800px';
 `
 
 
 	const button = useRef(null)
-	// useEffect(() => {
-	// 	const typed = new Typed(button.current, {
-			// strings: [
-			// 	'I am passionate about... presence',
-			// 	'I am passionate about... coding',
-			// 	'I love... live music',
-			// 	'I enjoy... problem solving',
-			// 	'I escape with... weightlifting',
-			// 	'I seek... consciousness <i class="fas fa-om"></i>',
-			// 	'I would love... to meet you',
-			// ], //My sentences
-	// 		typeSpeed: 50, //How fast it types (higher = slower)
-	// 		backSpeed: 60, //How fast it backspaces (higher = slower)
-	// 		startDelay: 100,
-	// 		loop: true,
-	// 		showCursor: false,
-	// 	})
-	// 	return () => {
-	// 		typed.destroy()
-	// 	}
-	// }, [])
-
-	const typedProps = {
+	const typedProps: ReactTypedProps = {
 		strings: [
 			'I am passionate about... presence',
 			'I am passionate about... coding',
-			'I love... live music',
-			'I enjoy... problem solving',
-			'I escape with... weightlifting',
-			'I seek... consciousness <i class="fas fa-om"></i>',
-			'I would love... to meet you',
+			// 'I love... live music',
+			// 'I enjoy... problem solving',
+			// 'I escape with... weightlifting',
+			// 'I seek... consciousness <i class="fas fa-om"></i>',
+			// 'I would love... to meet you',
 		],
-		ref: button
+		typeSpeed: 50,
+		backSpeed: 60,
+		loop: true,
+		// style: {
+		// 	height: 200,
+		// },
+		// attr: 'I'
+		// ref: button
 	}
 
-	useEffect(() => {
-		const typed = TypedComponent(typedProps)
-		return () => {
-			typed?.destroy()
-		}
-	}, [])
-
-	
-
-	const ShiftButton = ({onClick}) => (
-		<Button onClick={onClick} />
-	)
-	// {
-	// 	const ref = useRef(null)
-	// 	return (
-	// 	<Button ref={ref} onClick={onClick} />
-	// )}
-
-	
-
-	// export function Canvas() {
-		
-	// }
-
-	
-
-	const hueShift = () => {
-		if (rotate !== 315){setRotate(rotate + 45)}
-			else {setRotate(0)}
-			console.log(rotate)
-	}
 
 	const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -149,25 +96,9 @@ const Button = styled.div`
 	const canvas = canvasRef.current
 	const context = canvas?.getContext('2d')
 
-	console.log(height, width)
-
-	function setCanvasScalingFactor() {
-		return window.devicePixelRatio || 1;
-	 }
-
-	//  context.clearRect(0, 0, width, height)
-
-	function drawStuff() {
-		// var pixelRatio = setCanvasScalingFactor();
-		// Had to play with the math to get the sizing and spacing right
-
-		
-
-		
-
+	const drawStuff = () => {
 		const renderCircles = () => {
 		const colors = ['white', '#E4E4E4', '#616161']
-		// const colors = ['lightGrey', 'salmon', 'white']
 		if (canvas && context) {
 		canvas.style.width = '100%'
 		canvas.style.height = '60%'
@@ -180,28 +111,14 @@ const Button = styled.div`
 		//  Defines what happens when they overlap
 		context.globalAlpha = 1
 		context.globalCompositeOperation = "difference";
-		// context.globalCompositeOperation = 'exclusion'
-		// context.globalCompositeOperation = 'color-burn'
-		// context.globalCompositeOperation = 'lighten'
-		// context.globalCompositeOperation = 'darken'
-		// context.globalCompositeOperation = 'hue'
-		// context.globalCompositeOperation = 'color-dodge'
 		context.beginPath();
 		
 		context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
 		context.fillStyle = colors[dotColor];
-		// context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false)
-		// context.strokeStyle = 'rgba(136, 136, 136, 1)'
-		// context.strokeRect(0, 0, centerX, centerY)
-		// context.lineWidth = 6
 		context.fill();
-		// context.stroke()
-		// context.strokeRect(0, 0, canvas.width, canvas.height)
 			}
 		
 		}
-			// canvas.width = 860
-			// canvas.height = 860
 
 	
 				context?.clearRect(0, 0, width, height)
@@ -210,40 +127,16 @@ const Button = styled.div`
 				for (i = -2; i < (width / 60); i++) {
 				
 				renderCircles();
-
-		// canvas.width = width * pixelRatio;
-    	// canvas.height = height * pixelRatio;
-	
-		// canvas.width = width * pixelRatio;
-		// canvas.height = height * pixelRatio;
-		
-		// Optional border / Counldn't decide if I wanted it or not
-		// context.lineWidth = 3;
-		// context.strokeStyle = 'lightsalmon';
-		// context.stroke();
 			}
 		}
+
+	useEffect(() => {
+		drawStuff()
+	}, [canvasRef])
 	
-		useEffect(() => {
-			console.log('first run')
-
-
-			
-		  if (canvas) {
-			context?.clearRect(0, 0, width, height)
-			let i : number
-			
-			for (i = -2; i < (width / 120); i++) {
-			
-			drawStuff();
-		}
-			// do something here with the canvas
-		  }
-		}, [canvas, height, width])
 
 
 	return (
-		<>
 		<ThemeProvider theme={theme}>
 			<AppWrapper>
 				<Landing>
@@ -257,22 +150,20 @@ const Button = styled.div`
 						</Heading>
 					</Row>
 					<Row>
-						<Heading ref={button} />
+						<ReactTyped {...typedProps}>
+							<Heading>I</Heading>
+						</ReactTyped>
 					</Row>
-					{/* <Test onClick={() => console.log('hi')}> */}
-						
-					{/* </Test> */}
 				</Landing>
-				<Button onClick={() => hueShift()}>Test me</Button>
+				{/* <Button onClick={() => hueShift()}>Hi</Button>
+				 */}
+				 <ShiftButton />
 			</AppWrapper>
-			<div id='canvasWrapper'>
-		<canvas ref={canvasRef} style={styles.canvas} height={height + 'px'} width={width + 'px'} id='myCanvas' onClick={() => drawStuff()} />
-		</div>
+			{/* <div id='canvasWrapper'>
+				<canvas ref={canvasRef} style={styles.canvas} height={height + 'px'} width={width + 'px'} id='myCanvas' onClick={() => drawStuff()} />
+			</div> */}
+			<Canvas />
 		</ThemeProvider>
-		{/* <Landing onClick={() => drawStuff()}> */}
-		
-		{/* </Landing> */}
-		</>
 	)
 }
 
