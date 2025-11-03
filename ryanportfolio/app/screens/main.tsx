@@ -2,7 +2,7 @@ export default function Main() {
     return (
       <section>
         <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        Hi, I’m Ryan Koch, and I build modern web and mobile experiences.
+        Hi, I’m Smelly, and I build modern web and mobile experiences.
         </h1>
         <h2 className="mb-8 text-xl font-semibold tracking-tighter">
         Full-stack engineer specializing in React Native, TypeScript, and front-end architecture.

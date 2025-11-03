@@ -2,8 +2,7 @@ import Link from 'next/link'
 import { formatDate, getProjects } from 'app/projects/utils'
 
 export function Projects() {
-  let allProjects = []
-  // getProjects()
+  let allProjects = getProjects()
 
   return (
     <div>

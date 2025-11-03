@@ -12,13 +12,13 @@ export async function GET() {
       return 1
     })
     .map(
-      (p) =>
+      (post) =>
         `<item>
-          <title>${p.metadata.title}</title>
-          <link>${baseUrl}/projects/${p.slug}</link>
-          <description>${p.metadata.summary || ''}</description>
+          <title>${post.metadata.title}</title>
+          <link>${baseUrl}/projects/${post.slug}</link>
+          <description>${post.metadata.summary || ''}</description>
           <pubDate>${new Date(
-            p.metadata.publishedAt
+            post.metadata.publishedAt
           ).toUTCString()}</pubDate>
         </item>`
     )

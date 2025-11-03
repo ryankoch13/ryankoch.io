@@ -1,6 +1,6 @@
 "use client";
 import { View } from 'lucide-react'
-import { BlogPosts } from './components/posts'
+import { Projects } from './components/projects'
 import {motion} from 'motion/react'
 
 export default function Page() {
@@ -13,7 +13,7 @@ export default function Page() {
         transition={{ duration: 0.4 }}
   >
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-      Hi, I’m Ryan Koch, and I build modern web and mobile experiences.
+      Hi, I’m Smelly, and I build modern web and mobile experiences.
       </h1>
       </motion.section>
       <motion.section initial={{ opacity: 0 }}
@@ -38,10 +38,9 @@ export default function Page() {
       I care deeply about clean code, collaboration, and thoughtful design systems that make technology feel seamless.
       </p>
       </motion.section>
-      {/* <div className="my-8">
-        <BlogPosts />
-      </div> */}
-      {/* </View> */}
+      <div className="my-8">
+        <Projects />
+      </div>
     </section>
   )
 }

@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { formatDate, getBlogPosts } from '../../app/blog/utils'
+import { formatDate, getProjects } from '../../app/projects/utils'
 
-export function BlogPosts() {
-  let allBlogs = getBlogPosts()
+export function Projects() {
+  let allProjects = getProjects()
 
   return (
     <div>
-      {allBlogs
+      {allProjects
         .sort((a, b) => {
           if (
             new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
@@ -15,18 +15,18 @@ export function BlogPosts() {
           }
           return 1
         })
-        .map((post) => (
+        .map((p) => (
           <Link
-            key={post.slug}
+            key={p.slug}
             className="flex flex-col space-y-1 mb-4"
-            href={`/blog/${post.slug}`}
+            href={`/projects/${p.slug}`}
           >
             <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
               <p className="text-neutral-600 dark:text-neutral-400 w-[100px] tabular-nums">
-                {formatDate(post.metadata.publishedAt, false)}
+                {formatDate(p.metadata.publishedAt, false)}
               </p>
               <p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
-                {post.metadata.title}
+                {p.metadata.title}
               </p>
             </div>
           </Link>

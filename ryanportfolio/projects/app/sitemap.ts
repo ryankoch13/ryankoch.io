@@ -1,10 +1,10 @@
-import { getProjects } from '../app/projects/utils'
+import { getProjects } from 'app/projects/utils'
 
-export const baseUrl = 'https://portfolio-blog-starter.vercel.app'
+// export const baseUrl = 'https://portfolio-blog-starter.vercel.app'
 
 export default async function sitemap() {
   let projects = getProjects().map((p) => ({
-    url: `${baseUrl}/[projects]/${p.slug}`,
+    url: `${baseUrl}/projects/${p.slug}`,
     lastModified: p.metadata.publishedAt,
   }))
 
