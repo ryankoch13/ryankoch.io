@@ -1,6 +1,6 @@
 "use client";
 import { View } from 'lucide-react'
-import { BlogPosts } from './components/posts'
+import { Projects } from './components/projects'
 import {motion} from 'motion/react'
 
 export default function Page() {
